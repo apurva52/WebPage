@@ -1,0 +1,89 @@
+<!-- Header section Starts-->
+
+<p-toolbar class="p-ai-start container" [style]="{position: 'sticky',width: '100%',top: 0,'z-index': 9999}">
+  <div class="p-grid p-jc-around p-col-12 p-col-nogutter ">
+    <div class="p-col p-col-nogutter">
+      <h1 style="margin: 0;">Media</h1>
+    </div>
+    <div class="p-col p-grid p-jc-end p-col-nogutter">
+      <div class="p-col">
+        <button pButton pRipple type="button" label="Home" class="p-button-secondary p-button-text"
+          (click)="openHomePage()"></button>
+      </div>
+      <div class="p-col" *ngIf="loginName !== ''">
+        <button pButton pRipple type="button" label="Gallery" class="p-button-secondary p-button-text"
+          (click)="openGalleryPage()"></button>
+      </div>
+      <div class="p-col">
+        <button pButton pRipple type="button" label="About" class="p-button-secondary p-button-text"
+          (click)="openAboutPage()"></button>
+      </div>
+      <div class="p-col" *ngIf="loginName === ''">
+        <button pButton pRipple type="button" label="Login" class="p-button-secondary p-button-text"
+          (click)="op.toggle($event)"></button>
+      </div>
+      <div class="p-col" *ngIf="loginName !== ''">
+        <button pButton pRipple type="button" icon="pi pi-user" class="p-button-rounded p-button-info"
+          (click)="oq.toggle($event)"></button>
+        <h5 style="display: inline-block;margin: 8px;">{{loginName}}</h5>
+      </div>
+
+    </div>
+  </div>
+</p-toolbar>
+
+<!-- Header Section Ends -->
+<router-outlet></router-outlet>
+
+<!-- Footer Section -->
+<p-toolbar class="p-ai-end container">
+  <div class="p-grid p-col-12">
+    <div class="p-col-9"><span>PrimeNG 10.1.1-LTS by </span><a href="https://www.primetek.com.tr" style="
+    text-decoration: none;
+    color: black;
+    font-weight: 700;
+">PrimeTek</a>
+    </div>
+    <div class="p-col-3" style="text-align: right;"><a class="p-mr-3" href="https://github.com/primefaces/primeng"
+        style="
+    text-decoration: none;
+    color: black;
+    font-weight: 700;
+"><i class="pi pi-github"></i></a><a href="https://twitter.com/prime_ng" style="
+    text-decoration: none;
+    color: black;
+    font-weight: 700;
+"><i class="pi pi-twitter"></i></a></div>
+  </div>
+</p-toolbar>
+
+<!-- Footer Section Ends -->
+
+<p-overlayPanel #op appendTo="body" [style]="{width:'250px'}" [baseZIndex]="10000000">
+  <ng-template pTemplate>
+    <div class="p-grid p-col-12">
+      <h4 style="margin: 0;">User ID</h4>
+      <div class="p-col-12">
+        <input type="text" pInputText [(ngModel)]="userid" />
+        <h6 style="margin: 0;color: red;" *ngIf="error?.userid">{{error.userid}}</h6>
+      </div>
+
+      <h4 style="margin: 0;">Password</h4>
+      <div class="p-col-12">
+        <input type="password" pPassword [(ngModel)]="password" [feedback]="false" />
+        <h6 style="margin: 0;color: red;" *ngIf="error?.password">{{error.password}}</h6>
+      </div>
+      <h6 style="margin: 0;color: red;" *ngIf="error?.main">{{error.main}}</h6>
+    </div>
+    <div class="p-col-12" style="text-align: center;">
+      <button pButton label="Login" (click)="validateUser()"></button>
+    </div>
+  </ng-template>
+</p-overlayPanel>
+
+<p-overlayPanel #oq appendTo="body" [style]="{width:'125px'}" [baseZIndex]="10000000">
+  <button pButton pRipple type="button" label="LogOut" class="p-button-rounded p-button-warning"
+    (click)="logout()"></button>
+</p-overlayPanel>
+
+<p-toast [baseZIndex]="500000"></p-toast>
